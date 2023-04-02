@@ -1,0 +1,39 @@
+
+# bolg 프로젝트가 시작되기 직전에 yaml파일을 먼저 읽고 시작됨.
+server:
+  port: 8000  # 포트 번호 설정
+  servlet:
+    context-path: /  # 프로젝트 진입점 설정
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+    
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/views/ #컨트롤러가 리턴할 때 붙여주는 앞의 경로 값 설정
+      suffix: .jsp  #컨트롤러가 리턴할 때 붙여주는 뒤의 경로 값 설정
+      
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
+    username: cos
+    password: cos1234
+    
+  jpa:
+    open-in-view: true #lazy loding 가능
+    hibernate:
+      ddl-auto: update  #테이블을 어떻게 생성할 것인지 설정 
+      #create:프로젝트를 재실행할 때 마다 테이블을 새로만든다. update : 기존의 테이블을 수정한다.
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        #
+      use-new-id-generator-mappings: false  #jpa의 기본 넘버링 전략을 따라갈 것인지 설정 (false:따라가지않는다.)
+    show-sql: true #콘솔 창에 만들어진 테이블을 보여줌.
+    properties:
+      hibernate.format_sql: true # 만들어진 테이블을 여러 줄로 정렬해서 보여줌.
+
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
